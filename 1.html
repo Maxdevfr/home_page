@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            color: #333;
+            transition: background 0.5s ease;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 400px;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 25px;
+            font-size: 18px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #74ebd5;
+            box-shadow: 0 0 5px rgba(116, 235, 213, 0.5);
+        }
+        .search-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .search-button:hover {
+            background-color: #555;
+        }
+        .file-input {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0;
+            width: 0;
+        }
+        .file-label {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        .file-label:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello Max</h1>
+        <br><br><br><br>
+        <form action="https://www.google.com/search" method="get">
+            <input type="text" name="q" id="searchInput" placeholder="Votre recherche" 
+                   onfocus="this.placeholder=''" onblur="this.placeholder='Votre recherche'">
+            <br><br>
+            <button type="submit" class="search-button">Recherche</button>
+        </form>
+
+        <label for="imageInput" class="file-label">Changer le Fond d'Écran</label>
+        <input type="file" class="file-input" id="imageInput" accept="image/*">
+    </div>
+    <script>
+        const imageInput = document.getElementById('imageInput');
+
+        imageInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.body.style.backgroundImage = `url(${e.target.result})`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundPosition = 'center';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
